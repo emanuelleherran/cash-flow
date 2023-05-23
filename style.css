@@ -1,0 +1,298 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    background-color: #F9F6F2;
+    min-height: 100vh;
+}
+
+.header{
+    background: #5D5340;
+    height: 110px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-content img{
+    width: 200px;
+    height: auto;
+}
+
+.footer{
+    background: #5D5340;
+    height: 60px;
+    color: #F9F6F2;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.footer-content p{
+    font-family: Forum;
+    font-size: 14px;
+}
+
+.container-boxes{
+    flex: 1 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    flex-wrap: wrap;
+    min-width: 80vw;
+    padding: 30px 0;
+    row-gap: 30px;
+}
+
+.box-model{
+    background: #fff;
+    border: 2px solid #9C9C9C26;
+}
+
+.box-title{
+    font-family: Tenor Sans;
+    font-size: 16px;
+    height: 60px;
+    background-color: #414B3B;
+    color: #F9F6F2;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    padding-left: 25px;
+}
+
+.box-form-new-transaction{
+    padding: 40px;
+}
+
+.box-form-new-transaction label{
+    font-size: 16px;
+    color: #6B6B6B;
+    font-family: Forum;
+}
+
+.container-input-radio{
+    display: inline;
+    position: relative;
+    padding: 2px 20px 0 30px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    width: 100px;
+}
+
+.container-input-radio input{
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.checkmark{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 24px;
+    width: 24px;
+    background: #FFFFFF;
+    border: 1px solid #9C9C9C;
+    border-radius: 50%;
+}
+
+.container input:checked ~ .checkmark{
+    background-color: white;
+}
+
+.checkmark:after{
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+.container input:checked ~ .checkmark:after{
+    display: block;
+}
+  
+.container .checkmark:after{
+    top: 3px;
+    left: 3px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #AB8742;
+}
+
+.box-inputs{
+    padding-top: 30px;
+    display: flex;
+    column-gap: 20px;
+    flex-wrap: wrap;
+}
+
+.box-inputs input{
+    color: #9C9C9C;
+    font-family: Forum;
+    font-size: 16px;
+    border:1px solid #9C9C9C40;
+    border-radius: 3px;
+    background:white;
+    padding:5px 10px;
+    height: 46px;    
+}
+
+.box-inputs input[type="date"] {
+    appearance: none;
+    color: #9C9C9C;
+    font-family: Forum;
+    font-size: 16px;
+    border:1px solid #9C9C9C40;
+    border-radius: 3px;
+    background:white;
+    padding:5px 10px;
+    height: 46px;
+    outline: none;
+}
+
+.box-inputs input[type="date"]::-webkit-calendar-picker-indicator{
+    filter: invert(1);
+}
+
+.box-inputs input[type="date"]:focus{
+    color: #9C9C9C;
+    box-shadow: none;
+    border: 2px solid #AB8742;
+}
+
+.box-inputs input:focus{
+    border: 2px solid #AB8742;
+    outline: none;
+}
+
+.box-label-input label{
+    display: block;
+    padding-bottom: 5px;
+}
+
+.box-label-input{
+    padding-bottom: 10px;
+}
+
+#add-transaction{
+    border: none;
+    border-radius: 5px;
+    background-color: #AB8742;
+    width: 100%;
+    color: #F9F6F2;
+    font-size: 18px;
+    font-family: 'Biryani';
+    height: 50px;
+    margin-top: 30px;
+    cursor: pointer;
+}
+
+#add-transaction:hover{
+    background-color: #856833;
+}
+
+.content-balance-sheet{
+    /* display: flex;
+    flex-direction: column;
+    align-content: center;
+    flex-wrap: wrap; */
+
+    margin: 40px;
+}
+
+.tables-balance-sheet{
+    font-family: Forum;
+}
+
+.tables-balance-sheet table{
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 10px;
+}
+
+.tables-balance-sheet caption{
+    text-align: left;
+    font-size: 18px;
+    padding-bottom: 5px;
+    color: #AB8742;
+}
+
+.tables-balance-sheet table, th, td{
+    border: 1px solid #9C9C9C40;
+    text-align: center;
+    color: #9C9C9C;
+}
+
+.tables-balance-sheet th, td{
+    padding: 8px;
+}
+
+.side-collum{
+    width: 20%;
+}
+
+.central-collum{
+    width: 60%;
+}
+
+.empty-state{
+    border: 1px dashed #9C9C9C;
+    border-radius: 5px;
+    padding: 15px;
+}
+
+.content-img{
+    display: flex;
+    justify-content: center;
+}
+
+.content-empty-state-phrase{
+    font-size: 18px;
+    color: #9C9C9C;
+    font-family: Forum;
+    margin-top: 15px;
+    text-align: center;
+}
+
+.box-balance{
+    background-color: #AB8742;
+    color: #F9F6F2;
+    padding: 40px;
+    font-family: Tenor Sans;
+    font-size: 18px;
+}
+
+.separated-values p{
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+.separated-values hr{
+    margin-top: 2px;
+    margin-bottom: 2px;
+    height: 1px;
+    background-color: #F9F6F2;
+    border: none;
+}
+
+.box-values{
+    display: flex;
+}
+
+.positive-value{
+    color: #2C441F;
+}
+
+.negative-value{
+    color: #923F3F;
+}

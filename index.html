@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Biryani:wght@300;400&family=Forum&family=Tenor+Sans&display=swap" rel="stylesheet">
+    <title>CashFlow</title>
+</head>
+<body>
+    <div id="container" class="container">
+        <header id="header" class="header">
+            <div id="logo-content" class="logo-content">
+                <img src="/img/logo-edit.png" alt="CashFlowLogo">
+            </div>
+        </header>
+        <section id="container-boxes" class="container-boxes">
+            <div id="box-new-transaction" class="box-model">
+                <div id="box-title-new-transaction" class="box-title">
+                    <p id="title-new-transaction">New Transaction</p>
+                </div>
+                <div id="box-form-new-transaction" class="box-form-new-transaction">
+                    <form action="" id="form-new-transaction" class="form-new-transaction">
+                        <div class="box-input-radio">
+                            <label class="container-input-radio">Income
+                                <input type="radio" id="income-option" name="option" value="Income">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="container-input-radio">Expense
+                                <input type="radio" id="expense-option" name="option" value="Expense">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+
+                        <div class="box-inputs">
+                            <div class="box-label-input">
+                                <label for="date">Date</label>
+                                <input type="date" id="date" name="date">
+                            </div>
+        
+                            <div class="box-label-input">
+                                <label for="description">Description</label>
+                                <input type="text" id="description" name="description">
+                            </div>
+
+                            <div class="box-label-input">
+                                <label for="amount">Amount</label>
+                                <input type="text" id="amount" name="amount">
+                            </div>
+                        </div>
+    
+                        <input type="submit" id="add-transaction" value="+ Add Transaction">
+                    </form>
+                </div>
+            </div>
+    
+            <div id="box-balance-sheet" class="box-model">
+                <div id="box-title-balance-sheet" class="box-title">
+                    <p id="title-balance-sheet">Balance Sheet</p>
+                </div>
+                <div id="container-balance-sheet" class="container-balance-sheet">
+                    <div id="content-balance-sheet" class="content-balance-sheet">
+                        <div id="empty-state" class="empty-state">
+                            <div class="content-img">
+                                <img src="/img/emptyIcon.png" alt="icon">
+                            </div>
+                            <div class="content-empty-state-phrase">
+                                <p>You need to add new transactions
+                                    to see your balance sheet </p>
+                            </div>
+                        </div>
+                        <!-- <div id="tables-balance-sheet" class="tables-balance-sheet">
+                            <table>
+                                <caption>Income</caption>
+                                <tr>
+                                    <th class="side-collum">Date</th>
+                                    <th class="central-collum">Description</th>
+                                    <th class="side-collum">Amount</th>
+                                </tr>
+
+                                <tr>
+                                    <td>10/11/2023</td>
+                                    <td>Salary</td>
+                                    <td>$1000.00</td>
+                                </tr>
+                            </table>
+
+                            <table>
+                                <caption>Expense</caption>
+                                <tr>
+                                    <th class="side-collum">Date</th>
+                                    <th class="central-collum">Description</th>
+                                    <th class="side-collum">Amount</th>
+                                </tr>
+
+                                <tr>
+                                    <td>10/11/2023</td>
+                                    <td>Car</td>
+                                    <td>$750.00</td>
+                                </tr>
+                            </table>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+    
+            <div id="box-balance" class="box-balance">
+                <div id="separated-values" class="separated-values">
+                    <div id="box-income-value" class="box-values">
+                        <p id="income-value-title">Income: </p>
+                        <p id="income-value" class="positive-value">$ -</p>
+                    </div>
+
+                    <div id="box-expenses-value" class="box-values">
+                        <p id="expenses-value-title">Expenses: </p>
+                        <p id="expenses-value" class="negative-value">$ -</p>
+                    </div>
+
+                    <hr>
+
+                    <div id="box-balance-value" class="box-values">
+                        <p id="balance-value-title">Balance: </p>
+                        <p id="balance-value">$ -</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <footer id="footer" class="footer">
+            <div id="footer-content" class="footer-content">
+                <p>designed by Emanuelle Herran</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="index.js" defer></script>
+</body>
+</html>
