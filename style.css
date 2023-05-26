@@ -202,16 +202,17 @@
 }
 
 .content-balance-sheet{
-    /* display: flex;
+    display: flex;
     flex-direction: column;
     align-content: center;
-    flex-wrap: wrap; */
+    flex-wrap: wrap;
 
     margin: 40px;
 }
 
 .tables-balance-sheet{
     font-family: Forum;
+    min-width: 50vw;
 }
 
 .tables-balance-sheet table{

@@ -1,5 +1,5 @@
 const form = document.getElementById('form-new-transaction')
-const containerBalanceSheet = document.getElementById('container-balance-sheet')
+const contentBalanceSheet = document.getElementById('content-balance-sheet')
 
 form.addEventListener('submit', createNewTransaction)
 
@@ -23,8 +23,7 @@ async function createNewTransaction(ev){
 
     const savedTransaction = await response.json()
     form.reset()
-    
-    console.log(savedTransaction)
+    renderTransaction(savedTransaction)
 }
 
 function createTablesBalanceSheet(){
@@ -32,10 +31,12 @@ function createTablesBalanceSheet(){
     tablesBalanceSheet.id = 'tables-balance-sheet'
     tablesBalanceSheet.className = 'tables-balance-sheet'
 
-    containerBalanceSheet.appendChild(tablesBalanceSheet)
+    contentBalanceSheet.appendChild(tablesBalanceSheet)
 
     const tableIncome = document.createElement('table')
+    tableIncome.id = 'table-income'
     const tableExpense = document.createElement('table')
+    tableExpense.id = 'table-expense'
 
     tablesBalanceSheet.append(tableIncome, tableExpense)
 
@@ -43,11 +44,16 @@ function createTablesBalanceSheet(){
     captionIncome.innerText = 'Income'
     const captionExpense = document.createElement('caption')
     captionExpense.innerText = 'Expense'
+    const tbodyIncome = document.createElement('tbody')
+    const tbodyExpense = document.createElement('tbody')
     const trIncome = document.createElement('tr')
     const trExpense = document.createElement('tr')
 
-    tableIncome.append(captionIncome, trIncome)
-    tableExpense.append(captionExpense, trExpense)
+    tableIncome.append(captionIncome, tbodyIncome)
+    tableExpense.append(captionExpense, tbodyExpense)
+
+    tbodyIncome.appendChild(trIncome)
+    tbodyExpense.appendChild(trExpense)
 
     const thDateI = document.createElement('th')
     thDateI.className = 'side-collum'
@@ -77,8 +83,69 @@ function createTablesBalanceSheet(){
     trExpense.append(thDateE, thDescriptionE, thAmountE)
 }
 
-function renderTransaction(transactionData){
-    
+function showEmptyState(){
+    const emptyState = document.createElement('div')
+    emptyState.id = 'empty-state'
+    emptyState.className = 'empty-state'
+
+    contentBalanceSheet.appendChild(emptyState)
+
+    const contentImg = document.createElement('div')
+    contentImg.className = 'content-img'
+
+    const contentEmptyStatePhrase = document.createElement('div')
+    contentEmptyStatePhrase.className = 'content-empty-state-phrase'
+
+    emptyState.append(contentImg, contentEmptyStatePhrase)
+
+    const img = document.createElement('img')
+    img.src = '/img/emptyIcon.png'
+    img.alt = 'empty-icon'
+
+    contentImg.appendChild(img)
+
+    const phrase = document.createElement('p')
+    phrase.innerText = 'You need to add new transactions to see your balance sheet'
+
+    contentEmptyStatePhrase.appendChild(phrase)
 }
 
-createTablesBalanceSheet()
+function renderTransaction(transactionData){
+    const option = transactionData.option
+    const tableIncome = document.querySelector('#table-income tbody')
+    const tableExpense = document.querySelector('#table-expense tbody')
+
+    const trTransaction = document.createElement('tr')
+    trTransaction.id = `transaction-${transactionData.id}`
+
+    const date = document.createElement('td')
+    date.innerText = transactionData.date
+
+    const description = document.createElement('td')
+    description.innerText = transactionData.description
+
+    const amount = document.createElement('td')
+    amount.innerText = transactionData.amount
+
+    trTransaction.append(date, description, amount)
+
+    if(option === "Income"){
+        tableIncome.appendChild(trTransaction)
+    }else{
+        tableExpense.appendChild(trTransaction)
+    }
+}
+
+async function fetchTransaction(){
+    const transactions = await fetch("http://localhost:3000/transactions").then(res => res.json())
+    if (Object.keys(transactions).length > 0){
+        createTablesBalanceSheet()
+        transactions.forEach(renderTransaction)
+    }else{
+        showEmptyState()
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    fetchTransaction()
+})
