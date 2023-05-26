@@ -1,60 +1,25 @@
 {
   "transactions": [
     {
-      "option": "Income",
-      "date": "2023-05-17",
+      "option": "Expense",
+      "date": "2023-05-03",
       "description": "Salário",
-      "amount": "700.00",
+      "amount": "3000",
       "id": 1
     },
     {
-      "option": "Expense",
-      "date": "2023-05-12",
+      "option": "Income",
+      "date": "2023-04-30",
       "description": "Pão",
       "amount": "22.00",
       "id": 2
     },
     {
       "option": "Expense",
-      "date": "2023-05-05",
+      "date": "2023-05-09",
       "description": "Pão",
-      "amount": "2.00",
-      "id": 3
-    },
-    {
-      "option": "Income",
-      "date": "2023-05-31",
-      "description": "Salário",
-      "amount": "22.00",
-      "id": 4
-    },
-    {
-      "option": "Income",
-      "date": "2023-05-02",
-      "description": "Salário",
-      "amount": "700.00",
-      "id": 5
-    },
-    {
-      "option": "Income",
-      "date": "2023-05-02",
-      "description": "Pão",
-      "amount": "22.00",
-      "id": 6
-    },
-    {
-      "option": "Income",
-      "date": "2023-05-01",
-      "description": "Batata",
       "amount": "4.00",
-      "id": 7
-    },
-    {
-      "option": "Income",
-      "date": "2023-05-04",
-      "description": "Salário",
-      "amount": "700.00",
-      "id": 8
+      "id": 3
     }
   ]
 }

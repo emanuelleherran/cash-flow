@@ -266,7 +266,7 @@
 }
 
 .box-balance{
-    background-color: #AB8742;
+    background-color: #414B3B;
     color: #F9F6F2;
     padding: 40px;
     font-family: Tenor Sans;
@@ -291,9 +291,13 @@
 }
 
 .positive-value{
-    color: #2C441F;
+    color: #74d440;
 }
 
 .negative-value{
-    color: #923F3F;
+    color: #f13c3c;
+}
+
+.values{
+    padding-left: 10px;
 }
