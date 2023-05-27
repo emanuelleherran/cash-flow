@@ -3,6 +3,11 @@ const contentBalanceSheet = document.getElementById('content-balance-sheet')
 let sumIncome = 0, sumExpense = 0, balance = 0
 
 form.addEventListener('submit', createNewTransaction)
+contentBalanceSheet.addEventListener('click', function(e){
+    if(e.target.className === 'edit-icon-img'){
+        editingTransaction(e.target.id)
+    }
+})
 
 async function createNewTransaction(ev){
     ev.preventDefault()
@@ -31,6 +36,123 @@ async function createNewTransaction(ev){
     renderBalance()
 }
 
+function editingTransaction(transactionId){
+    const transaction = document.getElementById(transactionId).parentNode.parentNode
+    const editImgElement = document.getElementById(transactionId)
+    const deleteImgElement = transaction.querySelector('.delete-icon-img')
+    const savedDateElement = transaction.querySelector('.saved-date')
+    const savedDescriptionElement = transaction.querySelector('.saved-description')
+    const savedAmountElement = transaction.querySelector('.saved-amount')
+
+    const editDateInput = document.createElement('input')
+    editDateInput.type = 'date'
+    editDateInput.value = savedDateElement.innerText
+    savedDateElement.innerText = ''
+
+    const editDescriptionInput = document.createElement('input')
+    editDescriptionInput.type = 'text'
+    editDescriptionInput.value = savedDescriptionElement.innerText
+    savedDescriptionElement.innerText = ''
+
+    const editAmountInput = document.createElement('input')
+    editAmountInput.type = 'text'
+    editAmountInput.value = savedAmountElement.innerText
+    savedAmountElement.innerText = ''
+
+    savedDateElement.appendChild(editDateInput)
+    savedDescriptionElement.appendChild(editDescriptionInput)
+    savedAmountElement.appendChild(editAmountInput)
+
+    editImgElement.src = '/img/verificar.png'
+    deleteImgElement.src = '/img/cancelar.png'
+
+    const splitId = transaction.id.split('-')
+    const idTransaction = splitId[splitId.length-1]
+
+    editImgElement.addEventListener('click', function(){
+        updateTransaction(idTransaction, transaction)
+    })
+    deleteImgElement.addEventListener('click', function(){
+        cancelChange(idTransaction, transaction)
+    })
+}
+
+async function getTransaction(id){
+    const transaction = await fetch(`http://localhost:3000/transactions/${id}`).then(res => res.json())
+    return transaction
+}
+
+async function updateTransaction(id, element){
+    let op = ''
+
+    const editImgElement = element.querySelector('.edit-icon-img')
+    const deleteImgElement = element.querySelector('.delete-icon-img')
+    const savedDateInput = element.querySelector('.saved-date input')
+    const savedDescriptionInput = element.querySelector('.saved-description input')
+    const savedAmountInput = element.querySelector('.saved-amount input')
+    const savedDateElement = element.querySelector('.saved-date')
+    const savedDescriptionElement = element.querySelector('.saved-description')
+    const savedAmountElement = element.querySelector('.saved-amount')
+
+    if(element.className === 'incomeTr'){
+        op = "Income"
+    }else{
+        op = "Expense"
+    }
+
+    const transactionData = {
+        option: op,
+        date: savedDateInput.value,
+        description: savedDescriptionInput.value,
+        amount: savedAmountInput.value
+    }
+
+    const response = await fetch(`http://localhost:3000/transactions/${id}`, {
+         method: 'PUT',
+         headers: {
+             'Content-Type': 'application/json'
+         },
+         body: JSON.stringify(transactionData)
+    }).then(res => res.json())
+
+    savedDateElement.removeChild
+    savedDateElement.innerText = response.date
+
+    savedDescriptionElement.removeChild
+    savedDescriptionElement.innerText = response.description
+
+    savedAmountElement.removeChild
+    savedAmountElement.innerText = response.amount
+
+    editImgElement.src = '/img/editar-texto.png'
+    deleteImgElement.src = '/img/excluir.png'
+
+    location.reload(false);
+}
+
+async function cancelChange(id, element){
+    const transaction = await getTransaction(id)
+
+    //TODO create function to stop duplicate this code
+    const editImgElement = element.querySelector('.edit-icon-img')
+    const deleteImgElement = element.querySelector('.delete-icon-img')
+    const savedDateElement = element.querySelector('.saved-date')
+    const savedDescriptionElement = element.querySelector('.saved-description')
+    const savedAmountElement = element.querySelector('.saved-amount')
+
+    savedDateElement.removeChild
+    savedDateElement.innerText = transaction.date
+
+    savedDescriptionElement.removeChild
+    savedDescriptionElement.innerText = transaction.description
+
+    savedAmountElement.removeChild
+    savedAmountElement.innerText = transaction.amount
+
+    editImgElement.src = '/img/editar-texto.png'
+    deleteImgElement.src = '/img/excluir.png'
+}
+
 function createTablesBalanceSheet(){
     const table = document.getElementById('tables-balance-sheet')
 
@@ -43,6 +165,7 @@ function createTablesBalanceSheet(){
     
         const tableIncome = document.createElement('table')
         tableIncome.id = 'table-income'
+
         const tableExpense = document.createElement('table')
         tableExpense.id = 'table-expense'
     
@@ -137,18 +260,42 @@ function renderTransaction(transactionData){
 
     const date = document.createElement('td')
     date.innerText = transactionData.date
+    date.className = 'saved-date'
 
     const description = document.createElement('td')
     description.innerText = transactionData.description
+    description.className = 'saved-description'
 
     const amount = document.createElement('td')
     amount.innerText = transactionData.amount
+    amount.className = 'saved-amount'
 
-    trTransaction.append(date, description, amount)
+    const editIcon = document.createElement('td')
+    editIcon.className = 'button-1'
+
+    const deleteIcon = document.createElement('td')
+    deleteIcon.className = 'button-2'
+
+    trTransaction.append(date, description, amount, editIcon, deleteIcon)
+
+    const editIconImg = document.createElement('img')
+    editIconImg.className = 'edit-icon-img'
+    editIconImg.id = `edit-transaction-${transactionData.id}`
+    editIconImg.src = '/img/editar-texto.png'
+
+    const deteleIconImg = document.createElement('img')
+    deteleIconImg.className = 'delete-icon-img'
+    deteleIconImg.id = `delete-transaction-${transactionData.id}`
+    deteleIconImg.src = '/img/excluir.png'
+
+    editIcon.appendChild(editIconImg)
+    deleteIcon.appendChild(deteleIconImg)
 
     if(option === "Income"){
+        trTransaction.className = 'incomeTr'
         tableIncome.appendChild(trTransaction)
     }else{
+        trTransaction.className = 'expenseTr'
         tableExpense.appendChild(trTransaction)
     }
 }
@@ -192,14 +339,14 @@ async function fetchTransaction(){
     const transactions = await fetch("http://localhost:3000/transactions").then(res => res.json())
     if (Object.keys(transactions).length > 0){
         createTablesBalanceSheet()
+        transactions.forEach(renderTransaction)
         transactions.forEach(sumTransactions)
         renderBalance()
-        transactions.forEach(renderTransaction)
     }else{
         showEmptyState()
     }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    fetchTransaction()
+     fetchTransaction()
 })

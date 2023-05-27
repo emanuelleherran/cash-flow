@@ -129,6 +129,34 @@
     background: #AB8742;
 }
 
+.tables-balance-sheet input[type="date"]{
+    appearance: none;
+    color: #9C9C9C;
+    font-family: Forum;
+    font-size: 16px;
+    border: 1px solid #9C9C9C40;
+    border-radius: 3px;
+    background: white;
+    padding: 5px 10px;
+    height: 20px;
+    outline: none;
+}
+
+.tables-balance-sheet input[type="date"]::-webkit-calendar-picker-indicator{
+    filter: invert(1);
+}
+
+.tables-balance-sheet input{
+    color: #9C9C9C;
+    font-family: Forum;
+    font-size: 16px;
+    border: 1px solid #9C9C9C40;
+    border-radius: 3px;
+    background: white;
+    padding: 5px 10px;
+    height: 20px;    
+}
+
 .box-inputs{
     padding-top: 30px;
     display: flex;
@@ -236,6 +264,16 @@
 
 .tables-balance-sheet th, td{
     padding: 8px;
+}
+
+.edit-icon-img{
+    width: 18px;
+    cursor: pointer;
+}
+
+.delete-icon-img{
+    width: 18px;
+    cursor: pointer;
 }
 
 .side-collum{
