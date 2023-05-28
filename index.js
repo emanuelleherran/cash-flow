@@ -3,9 +3,12 @@ const contentBalanceSheet = document.getElementById('content-balance-sheet')
 let sumIncome = 0, sumExpense = 0, balance = 0
 
 form.addEventListener('submit', createNewTransaction)
+
 contentBalanceSheet.addEventListener('click', function(e){
     if(e.target.className === 'edit-icon-img'){
         editingTransaction(e.target.id)
+    }else if(e.target.className === 'delete-icon-img'){
+        deleteTransaction(e.target.id)
     }
 })
 
@@ -34,6 +37,23 @@ async function createNewTransaction(ev){
     renderTransaction(savedTransaction)
     sumTransactions(savedTransaction)
     renderBalance()
+}
+
+async function deleteTransaction(transactionId){
+    console.log(transactionId)
+    const splitId = transactionId.split('-')
+    const id = splitId[splitId.length-1]
+
+    console.log(splitId)
+    console.log(id)
+    await fetch(`http://localhost:3000/transactions/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(res => res.json())
+
+    location.reload(false)
 }
 
 function editingTransaction(transactionId){
@@ -127,7 +147,7 @@ async function updateTransaction(id, element){
     editImgElement.src = '/img/editar-texto.png'
     deleteImgElement.src = '/img/excluir.png'
 
-    location.reload(false);
+    location.reload(false)
 }
 
 async function cancelChange(id, element){

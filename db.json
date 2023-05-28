@@ -2,17 +2,17 @@
   "transactions": [
     {
       "option": "Expense",
-      "date": "2023-05-01",
-      "description": "Batata",
-      "amount": "8000",
-      "id": 1
+      "date": "2023-05-31",
+      "description": "Pão",
+      "amount": "2.00",
+      "id": 2
     },
     {
-      "option": "Income",
-      "date": "2023-02-28",
-      "description": "Salário",
-      "amount": "3000",
-      "id": 2
+      "option": "Expense",
+      "date": "2023-03-17",
+      "description": "Batata Altera",
+      "amount": "22.00",
+      "id": 4
     }
   ]
 }
